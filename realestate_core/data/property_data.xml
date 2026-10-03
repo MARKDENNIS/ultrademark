@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Attributes -->
+    <record id="attr_bedrooms" model="estate.property.attribute">
+        <field name="name">Bedrooms</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_bathrooms" model="estate.property.attribute">
+        <field name="name">Bathrooms</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_furnishing" model="estate.property.attribute">
+        <field name="name">Furnishing</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_amenities" model="estate.property.attribute">
+        <field name="name">Amenities</field>
+        <field name="attr_type">multi</field>
+    </record>
+    <record id="attr_parking" model="estate.property.attribute">
+        <field name="name">Parking Spaces</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_floor" model="estate.property.attribute">
+        <field name="name">Floor Number</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_total_floors" model="estate.property.attribute">
+        <field name="name">Total Floors</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_area_built" model="estate.property.attribute">
+        <field name="name">Built-up Area (sq.ft.)</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_area_total" model="estate.property.attribute">
+        <field name="name">Total Area (sq.ft.)</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_property_age" model="estate.property.attribute">
+        <field name="name">Property Age</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_availability" model="estate.property.attribute">
+        <field name="name">Availability</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_facing" model="estate.property.attribute">
+        <field name="name">Facing</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_flooring" model="estate.property.attribute">
+        <field name="name">Flooring Type</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_water_supply" model="estate.property.attribute">
+        <field name="name">Water Supply</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_power_backup" model="estate.property.attribute">
+        <field name="name">Power Backup</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_possession_status" model="estate.property.attribute">
+        <field name="name">Possession Status</field>
+        <field name="attr_type">select</field>
+    </record>
+
+    <!-- Attribute Values -->
+    <!-- Bedrooms -->
+    <record id="attr_bedrooms_1" model="estate.property.attribute.value">
+        <field name="name">1</field>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+    </record>
+    <record id="attr_bedrooms_2" model="estate.property.attribute.value">
+        <field name="name">2</field>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+    </record>
+    <record id="attr_bedrooms_3" model="estate.property.attribute.value">
+        <field name="name">3</field>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+    </record>
+    <record id="attr_bedrooms_4" model="estate.property.attribute.value">
+        <field name="name">4</field>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+    </record>
+    <record id="attr_bedrooms_5" model="estate.property.attribute.value">
+        <field name="name">5</field>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+    </record>
+
+    <!-- Bathrooms -->
+    <record id="attr_bathrooms_1" model="estate.property.attribute.value">
+        <field name="name">1</field>
+        <field name="attribute_id" ref="attr_bathrooms"/>
+    </record>
+    <record id="attr_bathrooms_2" model="estate.property.attribute.value">
+        <field name="name">2</field>
+        <field name="attribute_id" ref="attr_bathrooms"/>
+    </record>
+        <record id="attr_bathrooms_3" model="estate.property.attribute.value">
+        <field name="name">3</field>
+        <field name="attribute_id" ref="attr_bathrooms"/>
+    </record>
+    <record id="attr_bathrooms_4" model="estate.property.attribute.value">
+        <field name="name">4</field>
+        <field name="attribute_id" ref="attr_bathrooms"/>
+    </record>
+
+    <!-- Furnishing -->
+    <record id="attr_furnishing_furnished" model="estate.property.attribute.value">
+        <field name="name">Furnished</field>
+        <field name="attribute_id" ref="attr_furnishing"/>
+    </record>
+    <record id="attr_furnishing_unfurnished" model="estate.property.attribute.value">
+        <field name="name">Unfurnished</field>
+        <field name="attribute_id" ref="attr_furnishing"/>
+    </record>
+</odoo>

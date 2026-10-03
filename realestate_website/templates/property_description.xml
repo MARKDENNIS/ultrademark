@@ -1,0 +1,974 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="property_description" name="Property Description">
+    <style>
+      /* --- GLOBAL PREMIUM REAL ESTATE STYLES WITH 3D ANIMATIONS --- */
+
+      /* CSS Variables for consistent theming */
+      :root {
+        --brand-gold: #9a7b4f;
+        --brand-gold-light: rgba(154, 123, 79, 0.08);
+        --brand-gold-border: rgba(154, 123, 79, 0.3);
+        --dark-premium: #1a1a1a;
+        --text-muted: #888;
+        --text-body: #4a4a4a;
+        --border-light: #eaeaea;
+        --bg-soft: #fdfdfd;
+        --white: #ffffff;
+        --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+        --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.15);
+        --shadow-3d: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+
+     /* Keyframe Animations */
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translate3d(0, 40px, 0); }
+        to { opacity: 1; transform: translate3d(0, 0, 0); }
+      }
+
+      @keyframes fadeInLeft {
+        from { opacity: 0; transform: translate3d(-40px, 0, 0); }
+        to { opacity: 1; transform: translate3d(0, 0, 0); }
+      }
+
+      @keyframes fadeInRight {
+        from { opacity: 0; transform: translate3d(40px, 0, 0); }
+        to { opacity: 1; transform: translate3d(0, 0, 0); }
+      }
+
+      @keyframes scaleIn {
+        from { opacity: 0; transform: scale3d(0.9, 0.9, 0.9); }
+        to { opacity: 1; transform: scale3d(1, 1, 1); }
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0) rotate3d(1, 1, 0, 0deg); }
+        50% { transform: translateY(-10px) rotate3d(1, 1, 0, 2deg); }
+      }
+
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+
+      @keyframes pulse3d {
+        0%, 100% { transform: scale3d(1, 1, 1); box-shadow: 0 0 0 0 rgba(154, 123, 79, 0.4); }
+        50% { transform: scale3d(1.02, 1.02, 1.02); box-shadow: 0 0 0 10px rgba(154, 123, 79, 0); }
+      }
+
+      @keyframes rotateIn {
+        from { opacity: 0; transform: rotate3d(0, 1, 0, -90deg); }
+        to { opacity: 1; transform: rotate3d(0, 1, 0, 0deg); }
+      }
+
+      @keyframes bounceIn {
+        0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+        50% { transform: scale3d(1.05, 1.05, 1.05); }
+        70% { transform: scale3d(0.9, 0.9, 0.9); }
+        100% { opacity: 1; transform: scale3d(1, 1, 1); }
+      }
+
+      @keyframes glowPulse {
+        0%, 100% { box-shadow: 0 0 20px rgba(154, 123, 79, 0.3); }
+        50% { box-shadow: 0 0 40px rgba(154, 123, 79, 0.6); }
+      }
+
+      /* Base Wrapper */
+      .modern-prop-wrapper {
+        background: linear-gradient(180deg, #fdfdfd 0%, #f8f6f3 100%);
+        padding: 4rem 2rem;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #4a4a4a;
+        perspective: 1000px;
+        overflow-x: hidden;
+      }
+
+      /* Premium Color Palette */
+      .text-brand { color: var(--brand-gold) !important; }
+      .text-dark-premium { color: var(--dark-premium) !important; }
+      .bg-brand-soft { background-color: var(--brand-gold-light) !important; }
+      .border-brand { border-color: var(--brand-gold-border) !important; }
+      .border-light-subtle { border-color: var(--border-light) !important; }
+
+      /* Section Containers with 3D Effects */
+      .premium-section {
+        background: var(--white);
+        border-radius: 1.5rem;
+        border: 1px solid var(--border-light);
+        padding: 3rem;
+        margin-bottom: 3rem;
+        box-shadow: none;
+        transform-style: preserve-3d;
+        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .premium-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--brand-gold), #c9a96e, var(--brand-gold));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+
+      .premium-section:hover::before { transform: scaleX(1); }
+
+      .premium-section:hover {
+        transform: translateY(-8px) rotateX(2deg);
+        box-shadow: var(--shadow-hover);
+      }
+
+      .premium-section:nth-child(1) { animation-delay: 0.1s; }
+      .premium-section:nth-child(2) { animation-delay: 0.2s; }
+      .premium-section:nth-child(3) { animation-delay: 0.3s; }
+      .premium-section:nth-child(4) { animation-delay: 0.4s; }
+      .premium-section:nth-child(5) { animation-delay: 0.5s; }
+      .premium-section:nth-child(6) { animation-delay: 0.6s; }
+
+      .section-header-wrap {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        animation: fadeInLeft 0.6s ease-out forwards;
+        animation-delay: 0.3s;
+        opacity: 0;
+      }
+
+      .section-header-title {
+        font-weight: 300;
+        color: var(--dark-premium);
+        margin-bottom: 0;
+        padding-right: 1.5rem;
+        font-size: 2rem;
+        letter-spacing: -0.5px;
+        position: relative;
+      }
+
+      .section-header-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--brand-gold), transparent);
+        border-radius: 2px;
+      }
+
+      .section-header-line {
+        flex-grow: 1;
+        border-top: 1px solid var(--border-light);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section-header-line::after {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: -100%;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--brand-gold), transparent);
+        animation: shimmer 3s infinite;
+      }
+
+      /* Hero Stats Strip with 3D Cards */
+      .quick-stats-strip {
+        display: flex;
+        flex-wrap: wrap;
+        background: var(--white);
+        border: 1px solid var(--border-light);
+        border-radius: 1.5rem;
+        padding: 2rem 0;
+        margin-bottom: 3rem;
+        box-shadow: var(--shadow-soft);
+        transform-style: preserve-3d;
+        animation: scaleIn 0.8s ease-out forwards;
+        animation-delay: 0.2s;
+        opacity: 0;
+      }
+
+      .quick-stat-item {
+        flex: 1;
+        text-align: center;
+        border-right: 1px solid var(--border-light);
+        padding: 1rem 1.5rem;
+        transform-style: preserve-3d;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+      }
+
+      .quick-stat-item:hover { transform: translateZ(20px) scale(1.05); }
+
+      .quick-stat-item:hover .quick-stat-icon {
+        animation: float 2s ease-in-out infinite;
+        color: var(--brand-gold);
+        opacity: 1;
+      }
+
+      .quick-stat-item:last-child { border-right: none; }
+
+      .quick-stat-icon {
+        color: var(--brand-gold);
+        font-size: 1.8rem;
+        margin-bottom: 0.75rem;
+        display: block;
+        opacity: 0.7;
+        transition: all 0.4s ease;
+        transform-style: preserve-3d;
+      }
+
+      .quick-stat-value {
+        font-weight: 700;
+        color: var(--dark-premium);
+        font-size: 1.3rem;
+        transition: all 0.3s ease;
+      }
+
+      .quick-stat-item:hover .quick-stat-value { transform: scale(1.1); color: var(--brand-gold); }
+
+      .quick-stat-label {
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 1.5px;
+        color: var(--text-muted);
+        font-weight: 500;
+        margin-top: 0.3rem;
+      }
+
+      /* 3D Buttons */
+      .btn-premium-outline {
+        border: 2px solid var(--dark-premium);
+        color: var(--dark-premium);
+        font-weight: 600;
+        padding: 0.75rem 2rem;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        border-radius: 50px;
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        transform-style: preserve-3d;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-premium-outline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .btn-premium-outline:hover::before { left: 100%; }
+
+      .btn-premium-outline:hover {
+        background: var(--dark-premium);
+        color: var(--white);
+        transform: translateY(-3px) translateZ(10px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-premium-outline:active { transform: translateY(-1px) translateZ(5px); }
+
+      .btn-premium-outline.active-wishlist {
+        background: linear-gradient(135deg, #fff4f4, #ffe8e8);
+        border-color: #dc3545;
+        color: #dc3545;
+        animation: pulse3d 2s infinite;
+      }
+
+      /* Details Table */
+      .detail-list { padding: 0; margin: 0; list-style: none; display: flex; flex-wrap: wrap; }
+
+      .detail-item {
+        width: 50%;
+        padding: 1.25rem 0;
+        border-bottom: 1px solid var(--border-light);
+        display: flex;
+        justify-content: space-between;
+        padding-right: 2rem;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .detail-item::before {
+        content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+        background: var(--brand-gold); transition: width 0.4s ease;
+      }
+
+      .detail-item:hover::before { width: 100%; }
+
+      .detail-item:hover { background: linear-gradient(90deg, var(--brand-gold-light), transparent); padding-left: 1rem; }
+
+      .detail-label { color: var(--text-muted); font-weight: 500; transition: color 0.3s ease; }
+      .detail-item:hover .detail-label { color: var(--brand-gold); }
+      .detail-value { font-weight: 600; color: var(--dark-premium); }
+
+      @media (max-width: 767px) {
+        .detail-item { width: 100% !important; flex-direction: column; padding-right: 0; }
+        .detail-value { text-align: left !important; margin-top: 0.25rem; font-weight: 700; }
+      }
+
+      .hide-scrollbar::-webkit-scrollbar { display: none; }
+      .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+      /* 3D Gallery */
+      .gallery-img-wrap {
+        overflow: hidden;
+        border-radius: 1rem;
+        cursor: pointer;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .gallery-img-wrap img { transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); width: 100%; height: 100%; object-fit: cover; }
+      .gallery-img-wrap:hover { transform: translateY(-15px) rotateX(5deg) rotateY(-5deg) scale(1.02); box-shadow: var(--shadow-3d); }
+      .gallery-img-wrap:hover img { transform: scale(1.1); }
+
+      .gallery-img-wrap::before {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(135deg, rgba(154, 123, 79, 0.3), rgba(0, 0, 0, 0.4));
+        opacity: 0; transition: opacity 0.5s ease; z-index: 1; pointer-events: none;
+      }
+      .gallery-img-wrap:hover::before { opacity: 1; }
+
+      .gallery-img-wrap::after {
+        content: '\f002'; font-family: 'FontAwesome'; position: absolute; top: 50%; left: 50%;
+        transform: translate(-50%, -50%) scale(0); color: white; font-size: 2rem; opacity: 0;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); z-index: 2; pointer-events: none;
+      }
+      .gallery-img-wrap:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+      /* 3D Amenities Grid */
+      .amenity-grid-container { border-top: 1px solid var(--border-light); border-left: 1px solid var(--border-light); display: flex; flex-wrap: wrap; perspective: 1000px; }
+
+      .amenity-grid-item {
+        width: 50%; border-right: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);
+        padding: 2.5rem 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        text-align: center; background: var(--white); transform-style: preserve-3d;
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); position: relative; overflow: hidden;
+      }
+
+      /* Match the container hover scale of the quick-stats */
+      .amenity-grid-item:hover { transform: translateZ(20px) scale(1.05); background: var(--white); box-shadow: var(--shadow-hover); z-index: 10; }
+
+      @media (min-width: 768px) { .amenity-grid-item { width: 33.333%; } }
+      @media (min-width: 992px) { .amenity-grid-item { width: 20%; } }
+
+      /* Match Image Logo to float animation */
+      .amenity-grid-item img { width: 55px; height: 55px; object-fit: contain; margin-bottom: 1.25rem; opacity: 0.7; transition: all 0.4s ease; filter: grayscale(30%); display: block; }
+      .amenity-grid-item:hover img { opacity: 1; filter: grayscale(0%); animation: float 2s ease-in-out infinite; }
+
+      /* Match Text to scale slightly and turn gold */
+      .amenity-grid-item .amenity-name { color: var(--text-body); font-size: 0.95rem; font-weight: 500; transition: all 0.3s ease; position: relative; z-index: 1; display: inline-block; }
+      .amenity-grid-item:hover .amenity-name { color: var(--brand-gold); transform: scale(1.1); }
+
+      /* Match Fallback Icon to float animation and match color/opacity */
+      .amenity-fallback-icon { font-size: 42px; color: var(--brand-gold); margin-bottom: 1.25rem; opacity: 0.7; font-weight: 300; transition: all 0.4s ease; display: block; }
+      .amenity-grid-item:hover .amenity-fallback-icon { opacity: 1; animation: float 2s ease-in-out infinite; }
+
+
+      /* 3D Specifications Accordion */
+      .spec-minimal-acc .accordion-item { border: none; border-bottom: 1px solid var(--border-light); border-radius: 0 !important; background-color: transparent; margin-bottom: 0; transform-style: preserve-3d; transition: all 0.4s ease; }
+      .spec-minimal-acc .accordion-item:hover { background: linear-gradient(90deg, var(--brand-gold-light), transparent); transform: translateX(10px); }
+      .spec-minimal-acc .accordion-item:first-of-type { border-top: 1px solid var(--border-light); }
+      .spec-minimal-acc .accordion-button { background-color: transparent !important; color: var(--dark-premium); font-weight: 400; font-size: 1.15rem; padding: 1.5rem 0.5rem; box-shadow: none !important; transition: all 0.4s ease; }
+      .spec-minimal-acc .accordion-button:not(.collapsed) { color: var(--brand-gold); padding-left: 1rem; }
+      .spec-minimal-acc .accordion-button::after { display: none; }
+      .spec-minimal-acc .accordion-button .icon-plus, .spec-minimal-acc .accordion-button .icon-minus { font-weight: 300; font-size: 1.8rem; line-height: 1; color: #ccc; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+      .spec-minimal-acc .accordion-button:hover .icon-plus, .spec-minimal-acc .accordion-button:hover .icon-minus { transform: rotate(90deg); color: var(--brand-gold); }
+      .spec-minimal-acc .accordion-button.collapsed .icon-minus { display: none; }
+      .spec-minimal-acc .accordion-button:not(.collapsed) .icon-plus { display: none; }
+      .spec-minimal-acc .accordion-button:not(.collapsed) .icon-minus { display: inline-block; color: var(--brand-gold); transform: rotate(0deg); }
+      .spec-minimal-acc .accordion-body { padding: 1rem 1rem 2rem 2rem; border-left: 3px solid var(--brand-gold); margin-left: 0.5rem; margin-bottom: 1.5rem; animation: fadeInLeft 0.4s ease-out; background: linear-gradient(90deg, rgba(154, 123, 79, 0.05), transparent); }
+      .spec-minimal-acc .accordion-body ul { margin-bottom: 0; padding-left: 1.2rem; }
+      .spec-minimal-acc .accordion-body li { color: #555; margin-bottom: 0.8rem; font-size: 0.95rem; line-height: 1.6; opacity: 0; animation: fadeInUp 0.4s ease-out forwards; }
+      .spec-minimal-acc .accordion-body li:nth-child(1) { animation-delay: 0.1s; }
+      .spec-minimal-acc .accordion-body li:nth-child(2) { animation-delay: 0.2s; }
+      .spec-minimal-acc .accordion-body li:nth-child(3) { animation-delay: 0.3s; }
+
+      /* 3D Plans Section */
+      .custom-plan-pills .nav-link { border: 2px solid var(--border-light); color: #777; border-radius: 50px; padding: 0.5rem 2rem; font-size: 0.95rem; font-weight: 500; background: var(--white); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d; }
+      .custom-plan-pills .nav-link:hover { border-color: var(--brand-gold); color: var(--brand-gold); transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(154, 123, 79, 0.2); }
+      .custom-plan-pills .nav-link.active { background: linear-gradient(135deg, var(--brand-gold), #c9a96e) !important; color: var(--white) !important; border-color: var(--brand-gold); box-shadow: 0 10px 30px rgba(154, 123, 79, 0.4); transform: translateY(-2px); }
+      .plan-card-img-wrap { position: relative; cursor: pointer; overflow: hidden; background: var(--white); border: 1px solid var(--border-light); border-radius: 1rem; transform-style: preserve-3d; transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); }
+      .plan-card-img-wrap img { width: 100%; height: 350px; object-fit: cover; transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+      .plan-card-img-wrap:hover { transform: translateY(-15px) rotateX(5deg) scale(1.02); box-shadow: var(--shadow-3d); }
+      .plan-card-img-wrap:hover img { transform: scale(1.1); }
+      .plan-card-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(154, 123, 79, 0.4), rgba(0, 0, 0, 0.5)); display: flex; align-items: center; justify-content: center; opacity: 0; transition: all 0.5s ease; backdrop-filter: blur(2px); }
+      .plan-card-img-wrap:hover .plan-card-overlay { opacity: 1; }
+      .plan-card-overlay i { color: white; font-size: 3rem; font-weight: 100; text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); transform: scale(0) rotate(-180deg); transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+      .plan-card-img-wrap:hover .plan-card-overlay i { transform: scale(1) rotate(0deg); }
+      .plans-slider-wrapper { position: relative; width: 100%; }
+      .plans-scroll-container { display: flex; overflow-x: auto; scroll-behavior: smooth; gap: 2rem; padding: 1rem 0.5rem 1.5rem; scrollbar-width: none; }
+      .plans-scroll-container::-webkit-scrollbar { display: none; }
+      .plan-card { min-width: 350px; flex: 0 0 auto; transform-style: preserve-3d; animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+      .plan-card:nth-child(1) { animation-delay: 0.1s; }
+      .plan-card:nth-child(2) { animation-delay: 0.2s; }
+
+      .arrow-nav-btn { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #d1d1d1; background: var(--white); color: #7a7a7a; display: flex; align-items: center; justify-content: center; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); transform-style: preserve-3d; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); }
+      .arrow-nav-btn:hover { border-color: var(--brand-gold); color: var(--brand-gold); transform: translateY(-3px) scale(1.1); box-shadow: 0 10px 30px rgba(154, 123, 79, 0.3); }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .quick-stats-strip { flex-direction: column; }
+        .quick-stat-item { border-right: none; border-bottom: 1px solid var(--border-light); padding: 1.5rem; }
+        .quick-stat-item:last-child { border-bottom: none; }
+        .premium-section { padding: 2rem 1.5rem; }
+        .modern-prop-wrapper { padding: 2rem 1rem; }
+      }
+
+      .modern-prop-wrapper .container { max-width: 1200px !important; margin: 0 auto; }
+      /* Property Description Styling */
+      .property-description {
+        animation: fadeInUp 0.8s ease-out forwards;
+        opacity: 0;
+        animation-delay: 0.3s;
+      }
+
+      .property-description h1,
+      .property-description h2 {
+        font-size: 1.5rem !important;
+        font-weight: 700;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: var(--dark-premium);
+      }
+
+      .property-description h3,
+      .property-description h4 {
+        font-size: 1.25rem !important;
+        font-weight: 700;
+        margin-top: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+    </style>
+
+    <div class="modern-prop-wrapper">
+      <div class="container mx-auto">
+
+        <section class="mb-5 mt-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3 class="fw-bold mb-3">About this property</h3>
+                <div class="d-flex gap-2">
+    <button onclick="shareProperty()" class="btn btn-premium-outline btn-sm">
+        <i class="fa fa-share-alt me-1"/> Share
+    </button>
+
+    <t t-set="is_public_user" t-value="request.env.user._is_public()"/>
+    <t t-set="is_wishlisted" t-value="not is_public_user and property.id in request.env.user.property_wishlist_ids.ids"/>
+
+    <t t-if="is_public_user">
+        <button onclick="window.location.href='/web/login?redirect=' + encodeURIComponent(window.location.href)" class="btn btn-premium-outline btn-sm">
+            <i class="fa fa-heart-o me-1"/> Save
+        </button>
+    </t>
+
+    <t t-else="">
+        <button t-att-onclick="'toggleWishlist(%s)' % property.id" t-attf-class="btn btn-premium-outline btn-sm #{'active-wishlist' if is_wishlisted else ''}" id="btn-save-property">
+            <i t-attf-class="fa #{'fa-heart' if is_wishlisted else 'fa-heart-o'} me-1" id="icon-save-property"/> Save
+        </button>
+    </t>
+</div>
+            </div>
+        </section>
+
+        <div class="quick-stats-strip rounded-4 shadow-sm mb-5">
+          <div class="quick-stat-item">
+            <i class="fa fa-bed quick-stat-icon"/>
+            <div class="quick-stat-value"><t t-esc="property.bedrooms or '-'"/></div>
+            <div class="quick-stat-label">Bedrooms</div>
+          </div>
+          <div class="quick-stat-item">
+            <i class="fa fa-bath quick-stat-icon"/>
+            <div class="quick-stat-value"><t t-esc="property.bathrooms or '-'"/></div>
+            <div class="quick-stat-label">Bathrooms</div>
+          </div>
+          <div class="quick-stat-item">
+            <i class="fa fa-arrows-alt quick-stat-icon"/>
+            <div class="quick-stat-value"><t t-esc="property.area_built or '-'"/></div>
+            <div class="quick-stat-label">Sq.Ft. Area</div>
+          </div>
+          <div class="quick-stat-item border-right-0">
+            <i class="fa fa-home quick-stat-icon"/>
+            <div class="quick-stat-value text-truncate"><t t-esc="property.type_id.name or '-'"/></div>
+            <div class="quick-stat-label">Property Type</div>
+          </div>
+        </div>
+
+      <t t-if="property.description">
+          <section class="premium-section">
+            <div class="section-header-wrap">
+
+              <div class="section-header-line"> </div>
+            </div>
+            <div class="property-description lh-lg"
+                 style="font-size: 1.05rem; font-weight: 300; color: #555555; line-height: 1.8 !important;"
+                 t-field="property.description"/>
+          </section>
+        </t>
+
+        <section class="premium-section">
+          <div class="section-header-wrap">
+              <h2 class="section-header-title">Property Details</h2>
+              <div class="section-header-line"></div>
+          </div>
+          <ul class="detail-list mb-5">
+            <li class="detail-item"><span class="detail-label">Property Type</span><span class="detail-value"><t t-esc="(property.type_id and property.type_id.name) or 'N/A'"/></span></li>
+            <li class="detail-item"><span class="detail-label">Purpose</span><span class="detail-value"><t t-if="property.tenure == 'rent'">For Rent</t><t t-else="">For Sale</t></span></li>
+            <li class="detail-item"><span class="detail-label">Reference No.</span><span class="detail-value"><t t-esc="property.ref or property.id"/></span></li>
+            <li class="detail-item"><span class="detail-label">Status</span><span class="detail-value text-capitalize"><t t-esc="property.state or 'N/A'"/></span></li>
+            <li class="detail-item"><span class="detail-label">Furnishing</span><span class="detail-value text-capitalize"><t t-esc="property.furnishing.replace('_', ' ').title() if property.furnishing else 'N/A'"/></span></li>
+            <li class="detail-item"><span class="detail-label">Year Built</span><span class="detail-value"><t t-esc="property.year_built or 'N/A'"/></span></li>
+            <li class="detail-item"><span class="detail-label">Added On</span><span class="detail-value"><t t-esc="property.create_date.strftime('%d %b %Y') if property.create_date else 'N/A'"/></span></li>
+            <li class="detail-item"><span class="detail-label">Last Updated</span><span class="detail-value"><t t-esc="property.write_date.strftime('%d %b %Y') if property.write_date else 'N/A'"/></span></li>
+          </ul>
+          <t t-if="property.attribute_line_ids">
+            <h4 class="fw-normal mb-4 mt-2">Additional Features</h4>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-3">
+              <t t-foreach="property.attribute_line_ids" t-as="al" t-key="al.id">
+                <div class="col">
+                  <div class="p-3 rounded-3 bg-light border border-light-subtle h-100 d-flex flex-column justify-content-center text-center feature-card">
+                    <div class="text-muted small mb-1 fw-medium text-uppercase" style="font-size: 0.70rem; letter-spacing: 0.5px;" t-esc="al.attribute_id.name"/>
+                    <div class="fw-semibold text-dark-premium fs-6">
+                      <t t-if="al.value_id" t-esc="al.value_id.name"/>
+                      <t t-if="al.value_ids"><t t-foreach="al.value_ids" t-as="v" t-key="v.id"><t t-esc="v.name"/><t t-if="v != al.value_ids[-1]">, </t></t></t>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </div>
+          </t>
+        </section>
+
+        <t t-if="property.gallery_ids">
+          <section class="premium-section">
+            <div class="section-header-wrap">
+                <h2 class="section-header-title">Gallery</h2>
+                <div class="section-header-line"></div>
+            </div>
+            <t t-set="gals" t-value="property.gallery_ids.sudo()"/>
+            <div class="row flex-nowrap overflow-auto g-3 pb-3 hide-scrollbar" style="scroll-snap-type: x mandatory;">
+              <t t-foreach="gals" t-as="g" t-key="g.id">
+                <div class="col-10 col-md-5 col-lg-4" style="scroll-snap-align: start;">
+                  <div class="gallery-img-wrap shadow-sm" style="aspect-ratio: 4/3; width: 100%;">
+                    <img role="button" t-att-src="'/web/image/estate.property.image/%s/image_1920?width=600' % g.id" t-att-alt="g.caption or 'Photo'" t-att-data-index="g_index" data-bs-toggle="modal" data-bs-target="#galleryModal" loading="lazy"/>
+                  </div>
+                </div>
+              </t>
+            </div>
+            <script>
+            // <![CDATA[
+            document.addEventListener('DOMContentLoaded', function() {
+                var galleryModal = document.getElementById('galleryModal');
+                var galleryCarousel = document.getElementById('galleryCarousel');
+                var galleryCounter = document.getElementById('galleryCounter');
+                var totalSlides = <t t-esc="len(gals)"/>;
+                if (galleryModal && galleryCarousel) {
+                    var carousel = new bootstrap.Carousel(galleryCarousel);
+                    galleryModal.addEventListener('show.bs.modal', function (event) {
+                        var button = event.relatedTarget;
+                        var index = parseInt(button.getAttribute('data-index'));
+                        carousel.to(index);
+                        if (galleryCounter) { galleryCounter.innerText = (index + 1) + '/' + totalSlides; }
+                    });
+                    galleryCarousel.addEventListener('slid.bs.carousel', function () {
+                        var activeItem = galleryCarousel.querySelector('.carousel-item.active');
+                        var index = Array.from(galleryCarousel.querySelectorAll('.carousel-item')).indexOf(activeItem);
+                        if (galleryCounter) { galleryCounter.innerText = (index + 1) + '/' + totalSlides; }
+                    });
+                }
+            });
+            // ]]>
+            </script>
+          </section>
+        </t>
+
+        <t t-if="property.plan_ids">
+          <section class="premium-section">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex align-items-center">
+                    <h2 class="fw-normal text-dark mb-0 pe-4" style="font-size: 2.2rem;">Plans</h2>
+                    <div class="flex-grow-1 border-top" style="border-color: #e5e5e5 !important; width: 100px;"></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="arrow-nav-btn" onclick="scrollPlans('left')"><i class="fa fa-arrow-left"></i></button>
+                    <button class="arrow-nav-btn" onclick="scrollPlans('right')"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <t t-set="plan_categories" t-value="property.plan_ids.mapped('category_id')"/>
+            <ul class="nav nav-pills custom-plan-pills mb-5 gap-2" id="planFilterTabs" role="tablist">
+                <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#plan-pane-all" type="button">All</button></li>
+                <t t-foreach="plan_categories" t-as="cat">
+                    <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" t-att-data-bs-target="'#plan-pane-%s' % cat.id" type="button"><t t-esc="cat.name"/></button></li>
+                </t>
+            </ul>
+            <div class="tab-content" id="planTabsContent">
+              <div class="tab-pane fade show active" id="plan-pane-all" role="tabpanel">
+                <div class="plans-scroll-container">
+                  <t t-foreach="property.plan_ids" t-as="pl">
+                    <div class="plan-card">
+                      <div class="plan-card-img-wrap shadow-sm" data-bs-toggle="modal" t-att-data-bs-target="'#plan-modal-%s' % pl.id">
+                        <img t-att-src="'/web/image/estate.property.plan/%s/cover_image_1920' % pl.id" loading="lazy" t-att-alt="pl.name"/>
+                        <div class="plan-card-overlay"><i class="fa fa-search-plus"></i></div>
+                      </div>
+                      <h4 class="mt-3 mb-0 fw-medium text-capitalize"><t t-esc="pl.name"/></h4>
+                    </div>
+                  </t>
+                </div>
+              </div>
+              <t t-foreach="plan_categories" t-as="cat">
+                <div class="tab-pane fade" t-att-id="'plan-pane-%s' % cat.id" role="tabpanel">
+                  <div class="plans-scroll-container">
+                    <t t-foreach="property.plan_ids.filtered(lambda p: p.category_id.id == cat.id)" t-as="pl">
+                      <div class="plan-card">
+                        <div class="plan-card-img-wrap shadow-sm" data-bs-toggle="modal" t-att-data-bs-target="'#plan-modal-%s' % pl.id">
+                          <img t-att-src="'/web/image/estate.property.plan/%s/cover_image_1920' % pl.id" loading="lazy" t-att-alt="pl.name"/>
+                          <div class="plan-card-overlay"><i class="fa fa-search-plus"></i></div>
+                        </div>
+                        <h4 class="mt-3 mb-0 fw-medium text-capitalize"><t t-esc="pl.name"/></h4>
+                      </div>
+                    </t>
+                  </div>
+                </div>
+              </t>
+            </div>
+            <script>
+            // <![CDATA[
+            function scrollPlans(direction) {
+                const activePane = document.querySelector('.tab-pane.active .plans-scroll-container');
+                if(activePane) {
+                    const scrollAmount = 380;
+                    if(direction === 'left') activePane.scrollLeft -= scrollAmount;
+                    else activePane.scrollLeft += scrollAmount;
+                }
+            }
+            // ]]>
+            </script>
+          </section>
+        </t>
+
+        <!-- AMENITIES -->
+        <t t-if="property.amenity_ids">
+          <section class="premium-section">
+            <div class="section-header-wrap">
+                <h2 class="section-header-title">Amenities</h2>
+                <div class="section-header-line"></div>
+            </div>
+
+            <div class="amenity-grid-container border rounded-3 overflow-hidden">
+              <t t-foreach="property.amenity_ids[:14]" t-as="amenity">
+                <div class="amenity-grid-item border-light-subtle">
+                  <t t-if="amenity.image_1920">
+                    <img t-att-src="'/web/image/estate.property.amenity/%s/image_1920' % amenity.id" t-att-alt="amenity.name"/>
+                  </t>
+                  <t t-else="">
+                    <t t-set="icon_class" t-value="'fa-check-circle-o'"/>
+                    <t t-if="'Balcony' in amenity.name"><t t-set="icon_class" t-value="'fa-building-o'"/></t>
+                    <t t-if="'CCTV' in amenity.name or 'Security' in amenity.name"><t t-set="icon_class" t-value="'fa-video-camera'"/></t>
+                    <t t-if="'Pool' in amenity.name"><t t-set="icon_class" t-value="'fa-life-ring'"/></t>
+                    <t t-if="'Kitchen' in amenity.name"><t t-set="icon_class" t-value="'fa-cutlery'"/></t>
+                    <t t-if="'Pet' in amenity.name"><t t-set="icon_class" t-value="'fa-paw'"/></t>
+                    <t t-if="'Power' in amenity.name or 'Solar' in amenity.name"><t t-set="icon_class" t-value="'fa-bolt'"/></t>
+                    <t t-if="'Wheelchair' in amenity.name"><t t-set="icon_class" t-value="'fa-wheelchair'"/></t>
+                    <t t-if="'Water' in amenity.name or 'Rainwater' in amenity.name"><t t-set="icon_class" t-value="'fa-tint'"/></t>
+                    <t t-if="'Gym' in amenity.name or 'Fitness' in amenity.name"><t t-set="icon_class" t-value="'fa-heartbeat'"/></t>
+
+                    <i t-attf-class="fa #{icon_class} amenity-fallback-icon"> </i>
+                  </t>
+                  <div class="amenity-name"><t t-esc="amenity.name"/></div>
+                </div>
+              </t>
+
+              <t t-if="len(property.amenity_ids) > 14">
+                <div class="amenity-grid-item border-light-subtle" style="cursor: pointer; background-color: #fafbfc;" data-bs-toggle="modal" data-bs-target="#amenitiesModal">
+                  <div class="fs-4 text-muted mb-2">+<t t-esc="len(property.amenity_ids) - 14"/></div>
+                  <div class="amenity-name fw-semibold">More Amenities</div>
+                </div>
+              </t>
+            </div>
+
+            <!-- MODAL GRID -->
+            <t t-if="len(property.amenity_ids) > 14">
+              <div class="modal fade" id="amenitiesModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                  <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                    <div class="modal-header border-bottom px-4 py-4 bg-light">
+                      <h5 class="modal-title fw-normal text-dark fs-3">All Amenities</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0 bg-white">
+                      <div class="amenity-grid-container border-0">
+                        <t t-foreach="property.amenity_ids" t-as="amenity">
+                          <div class="amenity-grid-item border-light-subtle" style="width: 25% !important;">
+                            <t t-if="amenity.image_1920">
+                              <img t-att-src="'/web/image/estate.property.amenity/%s/image_1920' % amenity.id" t-att-alt="amenity.name"/>
+                            </t>
+                            <t t-else="">
+                              <t t-set="icon_class" t-value="'fa-check-circle-o'"/>
+                              <t t-if="'Balcony' in amenity.name"><t t-set="icon_class" t-value="'fa-building-o'"/></t>
+                              <t t-if="'CCTV' in amenity.name or 'Security' in amenity.name"><t t-set="icon_class" t-value="'fa-video-camera'"/></t>
+                              <t t-if="'Pool' in amenity.name"><t t-set="icon_class" t-value="'fa-life-ring'"/></t>
+                              <t t-if="'Kitchen' in amenity.name"><t t-set="icon_class" t-value="'fa-cutlery'"/></t>
+                              <t t-if="'Pet' in amenity.name"><t t-set="icon_class" t-value="'fa-paw'"/></t>
+                              <t t-if="'Power' in amenity.name or 'Solar' in amenity.name"><t t-set="icon_class" t-value="'fa-bolt'"/></t>
+                              <t t-if="'Wheelchair' in amenity.name"><t t-set="icon_class" t-value="'fa-wheelchair'"/></t>
+                              <t t-if="'Water' in amenity.name or 'Rainwater' in amenity.name"><t t-set="icon_class" t-value="'fa-tint'"/></t>
+                              <t t-if="'Gym' in amenity.name or 'Fitness' in amenity.name"><t t-set="icon_class" t-value="'fa-heartbeat'"/></t>
+                              <i t-attf-class="fa #{icon_class} amenity-fallback-icon"> </i>
+                            </t>
+                            <div class="amenity-name"><t t-esc="amenity.name"/></div>
+                          </div>
+                        </t>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </t>
+          </section>
+        </t>
+
+        <t t-if="property.spec_group_ids">
+          <section class="premium-section">
+            <div class="section-header-wrap">
+                <h2 class="section-header-title">Specifications</h2>
+                <div class="section-header-line"></div>
+            </div>
+            <div class="accordion spec-minimal-acc" id="specAccordion">
+              <t t-foreach="property.spec_group_ids" t-as="sg" t-key="sg.id">
+                <div class="accordion-item border-light-subtle">
+                  <h2 class="accordion-header" t-att-id="'spec-heading-%s' % sg.id">
+                    <button class="accordion-button collapsed d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" t-att-data-bs-target="'#spec-collapse-%s' % sg.id" aria-expanded="false">
+                      <span><t t-esc="sg.name"/></span>
+                      <span class="ms-auto text-muted"><span class="icon-plus">+</span><span class="icon-minus">−</span></span>
+                    </button>
+                  </h2>
+                  <div t-att-id="'spec-collapse-%s' % sg.id" class="accordion-collapse collapse" data-bs-parent="#specAccordion">
+                    <div class="accordion-body">
+                      <t t-if="sg.item_ids">
+                        <ul>
+                          <t t-foreach="sg.item_ids" t-as="si" t-key="si.id">
+                            <li><t t-esc="si.name"/><t t-if="si.note"><br/><span class="text-muted"><t t-esc="si.note"/></span></t></li>
+                          </t>
+                        </ul>
+                      </t>
+                      <t t-else=""><div class="text-muted fst-italic">No items listed.</div></t>
+                    </div>
+                  </div>
+                </div>
+              </t>
+            </div>
+          </section>
+        </t>
+
+        <section class="premium-section mb-0 p-0 border-0 overflow-hidden shadow-sm">
+          <div class="ratio ratio-21x9 bg-light">
+             <t t-if="property.latitude and property.longitude">
+              <iframe t-att-src="'https://maps.google.com/maps?q=%s,%s&amp;z=15&amp;output=embed' % (property.latitude, property.longitude)" style="border:0; width:100%; height:100%;" loading="lazy"/>
+            </t>
+            <t t-else="">
+              <div class="d-flex flex-column align-items-center justify-content-center h-100 bg-white text-muted">
+                <div class="bg-light p-4 rounded-circle mb-3"><i class="fa fa-map-marker-alt fa-2x text-muted"/></div>
+                <div class="fw-medium">Map coordinates not available</div>
+              </div>
+            </t>
+          </div>
+        </section>
+
+        <script>
+        // <![CDATA[
+            function shareProperty() {
+                var url = window.location.href;
+                if (navigator.share) {
+                    navigator.share({ title: document.title, url: url }).catch(function(err) { console.error('Share failed:', err); });
+                } else {
+                    var textArea = document.createElement("textarea");
+                    textArea.value = url; document.body.appendChild(textArea); textArea.select();
+                    try { document.execCommand('copy'); alert('Property link copied to clipboard!'); } catch (err) { console.error('Copy failed:', err); }
+                    document.body.removeChild(textArea);
+                }
+            }
+
+          function toggleWishlist(propertyId) {
+    fetch('/api/realestate_core/wishlist/toggle', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            jsonrpc: "2.0",
+            method: "call",
+            params: {
+                property_id: propertyId
+            }
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Fallback: If session expired while on the page, force login redirect
+        if (data.error) {
+            window.location.href = '/web/login?redirect=' + encodeURIComponent(window.location.href);
+            return;
+        }
+
+        if (data.result && data.result.status === 'success') {
+            const btn = document.getElementById('btn-save-property');
+            const icon = document.getElementById('icon-save-property');
+
+            if (data.result.is_wishlisted) {
+                btn.classList.add('active-wishlist');
+                icon.classList.remove('fa-heart-o');
+                icon.classList.add('fa-heart');
+            } else {
+                btn.classList.remove('active-wishlist');
+                icon.classList.remove('fa-heart');
+                icon.classList.add('fa-heart-o');
+            }
+        } else {
+            console.error('Error toggling wishlist:', data);
+            alert(data.result?.message || 'Failed to update wishlist.');
+        }
+    })
+    .catch(error => console.error('Fetch error:', error));
+}
+        // ]]>
+
+        </script>
+
+      </div> </div> <t t-if="property.gallery_ids">
+      <t t-set="gals" t-value="property.gallery_ids.sudo()"/>
+      <div class="modal fade" id="galleryModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+          <div class="modal-content bg-transparent border-0 rounded-0">
+            <div class="modal-header border-0 position-absolute top-0 w-100 z-3 p-3 p-md-4 d-flex justify-content-between align-items-start" style="pointer-events: none;">
+              <h5 class="modal-title text-white fw-light text-shadow" style="pointer-events: auto;">
+                Gallery <span class="badge bg-brand ms-2 fw-normal" id="galleryCounter">1/<t t-esc="len(gals)"/></span>
+              </h5>
+             <button type="button" class="btn btn-link text-white text-decoration-none fs-3 p-0 m-0 shadow-none" data-bs-dismiss="modal" aria-label="Close" style="pointer-events: auto; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                <i class="fa fa-times"> </i>
+              </button>
+            </div>
+            <div class="modal-body p-0" style="background-color: rgba(0, 0, 0, 0.85);">
+              <div id="galleryCarousel" class="carousel slide h-100" data-bs-ride="false">
+                <div class="carousel-inner h-100">
+                  <t t-foreach="gals" t-as="g" t-key="g.id">
+                    <div t-attf-class="carousel-item h-100 #{'active' if g_index == 0 else ''}">
+                      <div class="d-flex justify-content-center align-items-center h-100 w-100 p-3 p-md-5">
+                        <img class="img-fluid shadow-lg" style="max-height: 90vh; max-width: 100%; object-fit: contain;" t-att-src="'/web/image/estate.property.image/%s/image_1920' % g.id" loading="lazy" alt="Property Image"/>
+                      </div>
+                    </div>
+                  </t>
+                </div>
+                <button class="carousel-control-prev w-auto ps-2 ps-md-4" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon p-3 bg-dark bg-opacity-75 rounded-circle" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+                </button>
+                <button class="carousel-control-next w-auto pe-2 pe-md-4" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon p-3 bg-dark bg-opacity-75 rounded-circle" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
+
+    <t t-if="property.plan_ids">
+      <t t-foreach="property.plan_ids" t-as="pl" t-key="pl.id">
+        <div class="modal fade" t-att-id="'plan-modal-%s' % pl.id" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content bg-transparent border-0 rounded-0">
+              <div class="modal-header border-0 position-absolute top-0 w-100 z-3 p-3 p-md-4 d-flex justify-content-between align-items-start" style="pointer-events: none;">
+                <h5 class="modal-title text-white fw-light text-shadow" style="pointer-events: auto;">
+                  <t t-esc="pl.name"/> <t t-if="pl.category_id"><span class="text-muted mx-2">|</span><span class="fs-6 fw-normal text-light"><t t-esc="pl.category_id.name"/></span></t>
+                </h5>
+                 <button type="button" class="btn btn-link text-white text-decoration-none fs-3 p-0 m-0 shadow-none" data-bs-dismiss="modal" aria-label="Close" style="pointer-events: auto; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+              <div class="modal-body p-0" style="background-color: rgba(0, 0, 0, 0.85);">
+                <div t-att-id="'planCarousel-%s' % pl.id" class="carousel slide h-100" data-bs-ride="false">
+                  <div class="carousel-inner h-100">
+                    <t t-if="pl.image_ids">
+                        <t t-foreach="pl.image_ids" t-as="pi" t-key="pi.id">
+                          <div t-attf-class="carousel-item h-100 #{'active' if pi_index == 0 else ''}">
+                            <div class="d-flex justify-content-center align-items-center h-100 w-100 p-3 p-md-5">
+                              <img class="img-fluid shadow-lg" style="max-height: 90vh; max-width: 100%; object-fit: contain;" t-att-src="'/web/image/estate.property.plan.image/%s/image_1920' % pi.id"/>
+                            </div>
+                            <t t-if="pi.caption">
+                              <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded-pill py-2 px-4 mx-auto mb-4" style="width: max-content;">
+                                <p class="mb-0 text-white fw-semibold"><t t-esc="pi.caption"/></p>
+                              </div>
+                            </t>
+                          </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="carousel-item active h-100">
+                            <div class="d-flex justify-content-center align-items-center h-100 w-100 p-3 p-md-5">
+                              <img class="img-fluid shadow-lg" style="max-height: 90vh; max-width: 100%; object-fit: contain;" t-att-src="'/web/image/estate.property.plan/%s/cover_image_1920' % pl.id"/>
+                            </div>
+                        </div>
+                    </t>
+                  </div>
+                  <t t-if="len(pl.image_ids) > 1">
+                      <button class="carousel-control-prev w-auto ps-2 ps-md-4" type="button" t-att-data-bs-target="'#planCarousel-%s' % pl.id" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon p-3 bg-dark bg-opacity-75 rounded-circle" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+                      </button>
+                      <button class="carousel-control-next w-auto pe-2 pe-md-4" type="button" t-att-data-bs-target="'#planCarousel-%s' % pl.id" data-bs-slide="next">
+                        <span class="carousel-control-next-icon p-3 bg-dark bg-opacity-75 rounded-circle" aria-hidden="true" style="width: 3rem; height: 3rem;"></span>
+                      </button>
+                  </t>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </t>
+    </t>
+
+    <t t-if="len(property.amenity_ids) > 14">
+      <div class="modal fade" id="amenitiesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+          <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="modal-header border-bottom px-4 py-4 bg-light">
+              <h5 class="modal-title fw-normal text-dark fs-3">All Amenities</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0 bg-white">
+              <div class="amenity-grid-container border-0">
+                <t t-foreach="property.amenity_ids" t-as="amenity">
+                  <div class="amenity-grid-item border-light-subtle" style="width: 25% !important;">
+                    <t t-if="amenity.image_1920">
+                      <img t-att-src="'/web/image/estate.property.amenity/%s/image_1920' % amenity.id" t-att-alt="amenity.name"/>
+                    </t>
+                    <t t-else="">
+                      <i class="fa fa-check-circle-o amenity-fallback-icon"></i>
+                    </t>
+                    <div class="amenity-name"><t t-esc="amenity.name"/></div>
+                  </div>
+                </t>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
+
+  </template>
+</odoo>

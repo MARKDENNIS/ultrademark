@@ -1,0 +1,22 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_estate_property_user,estate.property user,model_estate_property,base.group_user,1,1,1,1
+access_estate_property_manager,estate.property manager,model_estate_property,base.group_user,1,1,1,1
+access_estate_type_user,estate.property.type user,model_estate_property_type,base.group_user,1,1,1,1
+access_estate_type_manager,estate.property.type manager,model_estate_property_type,base.group_user,1,1,1,1
+access_estate_attr_user,estate.property.attribute user,model_estate_property_attribute,base.group_user,1,1,1,1
+access_estate_attr_manager,estate.property.attribute manager,model_estate_property_attribute,base.group_user,1,1,1,1
+access_estate_attr_val_manager,estate.property.attribute.value manager,model_estate_property_attribute_value,base.group_user,1,1,1,1
+access_estate_attr_line_user,estate.property.attribute.line user,model_estate_property_attribute_line,base.group_user,1,1,1,1
+access_estate_property_image_user,estate.property.image (user),model_estate_property_image,base.group_user,1,1,1,1
+access_estate_property_spec_group_user,estate.property.spec.group (user),model_estate_property_spec_group,base.group_user,1,1,1,1
+access_estate_property_spec_item_user,estate.property.spec.item (user),model_estate_property_spec_item,base.group_user,1,1,1,1
+access_estate_property_plan_category_user,estate.property.plan.category (user),model_estate_property_plan_category,base.group_user,1,1,1,1
+access_estate_property_plan_user,estate.property.plan (user),model_estate_property_plan,base.group_user,1,1,1,1
+access_estate_property_plan_image_user,estate.property.plan.image (user),model_estate_property_plan_image,base.group_user,1,1,1,1
+access_estate_amenity_category_user,estate.property.amenity.category user,model_estate_property_amenity_category,base.group_user,1,1,1,1
+access_estate_amenity_user,estate.property.amenity user,model_estate_property_amenity,base.group_user,1,1,1,1
+access_estate_city_user,estate.city user,model_estate_city,base.group_user,1,1,1,1
+access_estate_area_user,estate.area user,model_estate_area,base.group_user,1,1,1,1
+access_estate_property_badge_user,estate.property.badge user,model_estate_property_badge,base.group_user,1,1,1,1
+access_estate_property_image_public,estate.property.image (public),model_estate_property_image,base.group_public,1,0,0,0
+access_estate_property_plan_image_public,estate.property.plan.image (public),model_estate_property_plan_image,base.group_public,1,0,0,0

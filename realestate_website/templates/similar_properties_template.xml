@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="similar_properties" name="Similar Properties">
+    <style>
+      /* Mobile Horizontal Scroll Styles */
+      @media (max-width: 767.98px) {
+        .mobile-swipe-row {
+          flex-wrap: nowrap !important;
+          overflow-x: auto !important;
+          overflow-y: hidden !important;
+          -webkit-overflow-scrolling: touch;
+          scroll-snap-type: x mandatory;
+          padding-bottom: 1rem;
+          /* Hide scrollbar for clean UI */
+          scrollbar-width: none;
+        }
+        .mobile-swipe-row::-webkit-scrollbar {
+          display: none;
+        }
+        .mobile-swipe-row > div {
+          /* Force cards to be 85% width on mobile so the next card peeks in */
+          flex: 0 0 85% !important;
+          max-width: 85% !important;
+          scroll-snap-align: start;
+        }
+      }
+    </style>
+
+    <div>
+
+      <t t-set="similar_props"
+         t-value="request.env['estate.property'].sudo().search([
+                    ('state', '=', 'published'),
+                    ('type_id', '=', property.type_id.id),
+                    ('id', '!=', property.id)
+                  ], order='priority desc,id desc', limit=6)"/>
+
+      <t t-if="similar_props">
+          <section class="pb-5 mt-3">
+
+            <div class="row g-4 mobile-swipe-row">
+              <t t-foreach="similar_props" t-as="prop">
+                <t t-call="realestate_website.property_card">
+                  <t t-set="prop" t-value="prop"/>
+                </t>
+              </t>
+            </div>
+
+          </section>
+        </t>
+
+    </div>
+  </template>
+</odoo>

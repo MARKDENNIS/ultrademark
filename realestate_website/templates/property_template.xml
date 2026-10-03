@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <template id="property" name="Property Page">
+    <t t-call="website.layout">
+
+      <t t-set="title" t-value="seo_title or property.website_meta_title or property.name"/>
+      <t t-set="description" t-value="property.website_meta_description or property.description"/>
+
+        <t t-set="head">
+            <!--<meta property="og:type" content="website"/>
+            <meta property="og:title" t-att-content="title"/>
+            <meta property="og:description" t-att-content="description"/>
+            <meta property="og:url" t-att-content="canonical_url"/>
+            <meta property="og:site_name" t-att-content="res_company.name"/>
+            <t t-if="og_image">
+              <meta property="og:image" t-att-content="og_image"/>
+              <meta property="og:image:width" content="1920"/>
+              <meta property="og:image:height" content="1080"/>
+            </t>
+
+            <meta name="twitter:card" content="summary_large_image"/>
+            <meta name="twitter:title" t-att-content="title"/>
+            <meta name="twitter:description" t-att-content="description"/>
+            <t t-if="og_image">
+              <meta name="twitter:image" t-att-content="og_image"/>
+            </t>-->
+
+            <link t-if="canonical_url" rel="canonical" t-att-href="canonical_url"/>
+
+            <script t-if="json_ld_str" type="application/ld+json" t-out="json_ld_str"/>
+          </t>
+
+      <div class="container my-5">
+        <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb bg-transparent p-0 m-0 small">
+            <li class="breadcrumb-item"><a href="/" class="text-decoration-none text-muted">Home</a></li>
+            <li class="breadcrumb-item"><a href="/properties" class="text-decoration-none text-muted">Properties</a></li>
+            <li class="breadcrumb-item active fw-bold" aria-current="page" t-esc="property.name"/>
+          </ol>
+        </nav>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div>
+              <h1 class="fw-bold mb-2 display-6 text-dark" t-esc="property.name"/>
+              <div class="text-muted fs-6 d-flex align-items-center">
+                <i class="fa fa-map-marker-alt text-primary me-2"/>
+                <t t-if="property.city_id"><t t-esc="property.city_id.name"/>,</t>
+                <t t-if="property.state_id"> <t t-esc="property.state_id.name"/>,</t>
+                <t t-if="property.country_id"> <t t-esc="property.country_id.name"/></t>
+              </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row g-5">
+          <div class="col-lg-8">
+
+           <div class="position-relative rounded-4 overflow-hidden shadow-sm mb-3 bg-light" style="height: 500px;">
+  <t t-if="property.gallery_ids">
+    <t t-set="gals" t-value="property.gallery_ids"/>
+    <img id="mainImage"
+         t-att-src="'/web/image/estate.property.image/%s/image_1920' % gals[0].id"
+         t-att-alt="property.name"
+         class="w-100 h-100 object-fit-cover transition-fade"/>
+
+   <button class="position-absolute start-0 translate-middle-y ms-3 rounded-circle shadow-sm border-0 d-flex align-items-center justify-content-center"
+        style="width: 48px; height: 48px; top: 50%; z-index: 12; cursor: pointer; transition: all 0.2s; background: rgba(255, 255, 255, 0.15);"
+        type="button"
+        onclick="navigateGallery(-1)">
+    <i class="fa fa-chevron-left text-dark"> </i>
+</button>
+
+<button class="position-absolute end-0 translate-middle-y me-3 rounded-circle shadow-sm border-0 d-flex align-items-center justify-content-center"
+        style="width: 48px; height: 48px; top: 50%; z-index: 12; cursor: pointer; transition: all 0.2s; background: rgba(255, 255, 255, 0.15);"
+        type="button"
+        onclick="navigateGallery(1)">
+    <i class="fa fa-chevron-right text-dark"></i>
+</button>
+  </t>
+  <t t-else="">
+    <img id="mainImage"
+         src="/web/static/src/img/placeholder.png"
+         alt="No image"
+         class="w-100 h-100 object-fit-cover opacity-50"/>
+  </t>
+
+  <div class="position-absolute top-0 start-0 m-3 z-index-1">
+  <span class="badge rounded-pill px-3 py-2 shadow-sm border border-success"
+        style="background-color: rgba(25, 135, 84, 0.15); color: #198754; backdrop-filter: blur(4px);">
+    <i class="fa fa-check-circle me-1"/> VERIFIED
+  </span>
+</div>
+</div>
+<div class="re-gallery-strip d-flex gap-2 overflow-auto pb-2 mb-5">
+  <t t-if="property.gallery_ids">
+    <t t-foreach="property.gallery_ids" t-as="img" t-key="img.id">
+      <img
+        t-att-src="'/web/image/estate.property.image/%s/image_1920' % img.id"
+        t-att-alt="img.caption or property.name"
+        class="re-thumbnail rounded-3 shadow-sm object-fit-cover cursor-pointer"
+        style="width: 120px; height: 80px; transition: border 0.2s;"
+        t-att-data-full-src="'/web/image/estate.property.image/%s/image_1920' % img.id"
+        t-att-data-index="img_index"
+        onclick="setGalleryIndex(parseInt(this.getAttribute('data-index')));"
+      />
+    </t>
+  </t>
+</div>
+
+<script>
+// <![CDATA[
+var currentGalleryIndex = 0;
+
+function updateGalleryUI() {
+    // Re-fetch thumbnails every time to ensure we have the correct count
+    var thumbnails = document.querySelectorAll('.re-thumbnail');
+    if (thumbnails.length === 0) return;
+
+    // Safety: If index is out of bounds, reset to 0
+    if (currentGalleryIndex >= thumbnails.length || currentGalleryIndex < 0) {
+        currentGalleryIndex = 0;
+    }
+
+    var targetThumb = thumbnails[currentGalleryIndex];
+    if (targetThumb) {
+        // Update Main Image
+        var mainImg = document.getElementById('mainImage');
+        if (mainImg) {
+            mainImg.src = targetThumb.getAttribute('data-full-src');
+        }
+
+        // Update active border classes
+        thumbnails.forEach(function(thumb, idx) {
+            if (idx === currentGalleryIndex) {
+                thumb.classList.add('border', 'border-primary', 'border-2');
+                thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            } else {
+                thumb.classList.remove('border', 'border-primary', 'border-2');
+            }
+        });
+    }
+}
+
+function navigateGallery(direction) {
+    var thumbnails = document.querySelectorAll('.re-thumbnail');
+    if (thumbnails.length === 0) return;
+
+    // Cycle index correctly
+    currentGalleryIndex = (currentGalleryIndex + direction + thumbnails.length) % thumbnails.length;
+    updateGalleryUI();
+}
+
+function setGalleryIndex(index) {
+    currentGalleryIndex = index;
+    updateGalleryUI();
+}
+
+// Mobile Swipe Touch Gesture Processing
+document.addEventListener('DOMContentLoaded', function() {
+    var mainImg = document.getElementById('mainImage');
+    var mainImgContainer = mainImg ? mainImg.parentElement : null;
+    if (mainImgContainer) {
+        var touchStartX = 0;
+        var touchEndX = 0;
+
+        mainImgContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+
+        mainImgContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, {passive: true});
+
+        function handleSwipe() {
+            var threshold = 40;
+            if (touchStartX - touchEndX > threshold) {
+                navigateGallery(1);  // Swiped left
+            } else if (touchEndX - touchStartX > threshold) {
+                navigateGallery(-1); // Swiped right
+            }
+        }
+    }
+});
+// ]]>
+</script>
+
+            <!--<hr class="mb-5 border-light"/>
+
+            <h4 class="fw-bold mb-4">Overview</h4>
+            <div class="row g-3 mb-5">
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center p-3 bg-light rounded-4">
+                  <i class="fa fa-bed fa-2x text-primary opacity-75 me-3"/>
+                  <div>
+                    <div class="small text-muted mb-0">Bedrooms</div>
+                    <div class="fw-bold fs-5"><t t-esc="property.bedrooms or '-'"/></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center p-3 bg-light rounded-4">
+                  <i class="fa fa-bath fa-2x text-primary opacity-75 me-3"/>
+                  <div>
+                    <div class="small text-muted mb-0">Bathrooms</div>
+                    <div class="fw-bold fs-5"><t t-esc="property.bathrooms or '-'"/></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center p-3 bg-light rounded-4">
+                  <i class="fa fa-vector-square fa-2x text-primary opacity-75 me-3"/>
+                  <div>
+                    <div class="small text-muted mb-0">Area (sq.ft)</div>
+                    <div class="fw-bold fs-5"><t t-esc="property.area_built or '-'"/></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="d-flex align-items-center p-3 bg-light rounded-4">
+                  <i class="fa fa-home fa-2x text-primary opacity-75 me-3"/>
+                  <div>
+                    <div class="small text-muted mb-0">Type</div>
+                    <div class="fw-bold fs-6 text-truncate"><t t-esc="property.type_id.name or '-'"/></div>
+                  </div>
+                </div>
+              </div>
+            </div>-->
+
+            <div class="text-secondary lh-lg mb-5" style="font-size: 1.05rem;">
+              <t t-call="realestate_website.property_description">
+                <t t-set="property" t-value="property"/>
+              </t>
+            </div>
+
+            <t t-if="property.attribute_line_ids">
+              <hr class="mb-5 border-light"/>
+              <h4 class="fw-bold mb-4">Features &amp; Amenities</h4>
+              <div class="row">
+                <t t-foreach="property.attribute_line_ids" t-as="al">
+                  <div class="col-md-6 mb-3">
+                    <div class="d-flex align-items-center">
+                      <i class="fa fa-check text-success me-2"/>
+                      <span class="text-secondary me-1"><t t-esc="al.attribute_id.name"/>:</span>
+                      <strong class="text-dark">
+                        <t t-if="al.value_id" t-esc="al.value_id.name"/>
+                        <t t-if="al.value_ids" t-esc="', '.join(al.value_ids.mapped('name'))"/>
+                      </strong>
+                    </div>
+                  </div>
+                </t>
+              </div>
+            </t>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-lg rounded-4 p-4 sticky-top" style="top: 100px; z-index: 10;">
+
+              <div class="mb-4 text-center">
+                <div class="text-muted small text-uppercase fw-bold tracking-wide mb-1">
+                    <t t-esc="property.tenure == 'sale' and 'Asking Price' or 'Monthly Rent'"/>
+                </div>
+                <div class="display-6 fw-bolder text-primary">
+                  <t t-if="property.tenure == 'sale'">
+                    <span t-att-title="property._format_compact_price()" t-esc="property._format_compact_price()"/>
+                  </t>
+                  <t t-if="property.tenure == 'rent'">
+                    <span t-att-title="property._format_compact_rent()" t-esc="property._format_compact_rent()"/>
+                  </t>
+                </div>
+                <div class="mt-2 pt-2 border-top small text-muted d-flex justify-content-between">
+                    <span>Available: <strong class="text-dark"><t t-esc="property.availability_date or 'Immediately'"/></strong></span>
+                    <!-- FIX APPLIED HERE: Added replace and title formatting -->
+                    <span>Status: <strong class="text-dark">
+                        <t t-esc="property.furnishing.replace('_', ' ').title() if property.furnishing else 'Unfurnished'"/>
+                    </strong></span>
+                </div>
+              </div>
+
+              <h5 class="fw-bold mb-3">Interested in this property?</h5>
+              <form t-att-action="'/property/inquiry'" method="post" class="d-grid gap-3">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <input type="hidden" name="property_id" t-att-value="property.id"/>
+
+                <div class="form-floating">
+                    <input required="required" type="text" class="form-control bg-light border-0" id="name" name="name" placeholder="Your Name"/>
+                    <label for="name" class="text-muted">Your Name</label>
+                </div>
+                <div class="form-floating">
+                    <input required="required" type="email" class="form-control bg-light border-0" id="email" name="email" placeholder="Email Address"/>
+                    <label for="email" class="text-muted">Email Address</label>
+                </div>
+                <div class="form-floating">
+                    <input type="tel" class="form-control bg-light border-0" id="phone" name="phone" placeholder="Phone Number"/>
+                    <label for="phone" class="text-muted">Phone Number</label>
+                </div>
+                <div class="form-floating">
+                    <textarea class="form-control bg-light border-0" id="message" name="message" placeholder="Message" style="height: 100px"></textarea>
+                    <label for="message" class="text-muted">Message (Optional)</label>
+                </div>
+
+                <button class="btn btn-primary btn-lg rounded-pill fw-bold mt-2" type="submit">
+                    Request Details
+                </button>
+              </form>
+              <t t-if="request.params.get('thanks')">
+                <div class="alert alert-success rounded-4 mt-3 mb-0 text-center border-0 shadow-sm">
+                  <i class="fa fa-check-circle me-1"/> Thanks! We'll contact you shortly.
+                </div>
+              </t>
+            </div>
+          </div>
+
+        </div> <div class="mt-6 pt-5">
+            <h3 class="fw-bold mb-4">Similar Properties</h3>
+            <t t-call="realestate_website.similar_properties"></t>
+        </div>
+      </div>
+    </t>
+  </template>
+</odoo>

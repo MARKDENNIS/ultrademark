@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- FIX: make these selectable ranges instead of number -->
+    <record id="attr_area_built" model="estate.property.attribute">
+        <field name="name">Built-up Area (sq.ft.)</field>
+        <field name="attr_type">select</field>
+    </record>
+    <record id="attr_area_total" model="estate.property.attribute">
+        <field name="name">Total Area (sq.ft.)</field>
+        <field name="attr_type">select</field>
+    </record>
+
+    <!-- Values for Built-up Area -->
+    <record id="attr_area_built_v1" model="estate.property.attribute.value">
+        <field name="name">Up to 500</field>
+        <field name="attribute_id" ref="attr_area_built"/>
+    </record>
+    <record id="attr_area_built_v2" model="estate.property.attribute.value">
+        <field name="name">501 – 1000</field>
+        <field name="attribute_id" ref="attr_area_built"/>
+    </record>
+    <record id="attr_area_built_v3" model="estate.property.attribute.value">
+        <field name="name">1001 – 1500</field>
+        <field name="attribute_id" ref="attr_area_built"/>
+    </record>
+    <record id="attr_area_built_v4" model="estate.property.attribute.value">
+        <field name="name">1501 – 2000</field>
+        <field name="attribute_id" ref="attr_area_built"/>
+    </record>
+    <record id="attr_area_built_v5" model="estate.property.attribute.value">
+        <field name="name">2000+</field>
+        <field name="attribute_id" ref="attr_area_built"/>
+    </record>
+
+    <!-- Values for Total Area -->
+    <record id="attr_area_total_v1" model="estate.property.attribute.value">
+        <field name="name">Up to 1000</field>
+        <field name="attribute_id" ref="attr_area_total"/>
+    </record>
+    <record id="attr_area_total_v2" model="estate.property.attribute.value">
+        <field name="name">1001 – 2000</field>
+        <field name="attribute_id" ref="attr_area_total"/>
+    </record>
+    <record id="attr_area_total_v3" model="estate.property.attribute.value">
+        <field name="name">2001 – 3000</field>
+        <field name="attribute_id" ref="attr_area_total"/>
+    </record>
+    <record id="attr_area_total_v4" model="estate.property.attribute.value">
+        <field name="name">3001 – 5000</field>
+        <field name="attribute_id" ref="attr_area_total"/>
+    </record>
+    <record id="attr_area_total_v5" model="estate.property.attribute.value">
+        <field name="name">5000+</field>
+        <field name="attribute_id" ref="attr_area_total"/>
+    </record>
+</odoo>

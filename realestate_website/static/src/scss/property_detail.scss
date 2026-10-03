@@ -1,0 +1,46 @@
+/* =========================================
+   PROPERTY DETAIL PAGE
+   ========================================= */
+
+/* Hide scrollbar for the thumbnail strip but keep functionality */
+.re-gallery-strip {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+.re-gallery-strip::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+
+/* Thumbnail styling */
+.re-thumbnail {
+    width: 120px;
+    height: 80px;
+    opacity: 0.6;
+    transition: opacity 0.3s ease, transform 0.2s ease, border 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.re-thumbnail:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+/* When a thumbnail is clicked, we can add a visual pop */
+.re-thumbnail:active {
+    transform: scale(0.95);
+}
+
+/* Smooth fade for the main image when swapped */
+.transition-fade {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Tracking utility for small caps text */
+.tracking-wide {
+    letter-spacing: 0.1em;
+}
+
+/* Padding utilities */
+.mt-6 {
+    margin-top: 5rem !important;
+}

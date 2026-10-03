@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="asset_realestate_front" model="ir.asset">
+      <field name="name">Real Estate Frontend Assets</field>
+      <field name="bundle">web.assets_frontend</field>
+      <field name="active">True</field>
+      <field name="directive">append</field>
+      <field name="target">(assetsbundle[name=web.assets_frontend])</field>
+      <field name="path">realestate_website/static/src/scss/styles.scss</field>
+    </record>
+  </data>
+</odoo>

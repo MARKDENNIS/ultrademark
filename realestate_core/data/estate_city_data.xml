@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Major Indian Cities -->
+    <record id="city_mumbai" model="estate.city">
+        <field name="name">Mumbai</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_mh"/> <!-- Maharashtra -->
+    </record>
+
+    <record id="city_delhi" model="estate.city">
+        <field name="name">Delhi</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_dl"/> <!-- Delhi -->
+    </record>
+
+    <record id="city_bengaluru" model="estate.city">
+        <field name="name">Bengaluru</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_ka"/> <!-- Karnataka -->
+    </record>
+
+    <record id="city_chennai" model="estate.city">
+        <field name="name">Chennai</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_tn"/> <!-- Tamil Nadu -->
+    </record>
+
+    <record id="city_kolkata" model="estate.city">
+        <field name="name">Kolkata</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_wb"/> <!-- West Bengal -->
+    </record>
+
+    <record id="city_hyderabad" model="estate.city">
+        <field name="name">Hyderabad</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_ts"/> <!-- Telangana -->
+    </record>
+
+    <record id="city_pune" model="estate.city">
+        <field name="name">Pune</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_mh"/> <!-- Maharashtra -->
+    </record>
+
+    <record id="city_ahmedabad" model="estate.city">
+        <field name="name">Ahmedabad</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_gj"/> <!-- Gujarat -->
+    </record>
+
+    <record id="city_jaipur" model="estate.city">
+        <field name="name">Jaipur</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_rj"/> <!-- Rajasthan -->
+    </record>
+
+    <record id="city_chandigarh" model="estate.city">
+        <field name="name">Chandigarh</field>
+        <field name="country_id" ref="base.in"/>
+        <field name="state_id" ref="base.state_in_ch"/> <!-- Chandigarh -->
+    </record>
+</odoo>

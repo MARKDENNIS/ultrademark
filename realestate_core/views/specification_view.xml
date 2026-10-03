@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- ===================== SPEC GROUP ===================== -->
+
+  <!-- List (tree) view -->
+  <record id="view_estate_spec_group_list" model="ir.ui.view">
+    <field name="name">estate.property.spec.group.list</field>
+    <field name="model">estate.property.spec.group</field>
+    <field name="arch" type="xml">
+      <list string="Specification Groups" create="true" edit="true">
+        <field name="sequence"/>
+        <field name="name"/>
+        <field name="property_id"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_estate_spec_group_form" model="ir.ui.view">
+    <field name="name">estate.property.spec.group.form</field>
+    <field name="model">estate.property.spec.group</field>
+    <field name="arch" type="xml">
+      <form string="Specification Group">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" placeholder="e.g., Kitchen, Flooring, Electrical"/>
+              <field name="sequence"/>
+            </group>
+            <group>
+              <field name="property_id" required="1"/>
+            </group>
+          </group>
+
+          <notebook>
+            <page string="Items">
+              <!-- No context with active_id needed; inverse m2o sets automatically -->
+              <field name="item_ids">
+                <list editable="bottom">
+                  <field name="sequence"/>
+                  <field name="name"/>
+                  <field name="note"/>
+                </list>
+                <form>
+                  <group>
+                    <field name="sequence"/>
+                    <field name="name" placeholder="e.g., Granite Countertop"/>
+                    <field name="note" placeholder="Optional notes (brand/spec, etc.)"/>
+                  </group>
+                </form>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_estate_spec_group" model="ir.actions.act_window">
+    <field name="name">Specification Groups</field>
+    <field name="res_model">estate.property.spec.group</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{}</field>
+    <field name="domain">[]</field>
+  </record>
+
+
+  <!-- ===================== SPEC ITEM ===================== -->
+
+  <!-- List (tree) view -->
+  <record id="view_estate_spec_item_list" model="ir.ui.view">
+    <field name="name">estate.property.spec.item.list</field>
+    <field name="model">estate.property.spec.item</field>
+    <field name="arch" type="xml">
+      <list string="Specification Items" create="true" edit="true">
+        <field name="sequence"/>
+        <field name="name"/>
+        <field name="group_id"/>
+        <field name="note"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form view -->
+  <record id="view_estate_spec_item_form" model="ir.ui.view">
+    <field name="name">estate.property.spec.item.form</field>
+    <field name="model">estate.property.spec.item</field>
+    <field name="arch" type="xml">
+      <form string="Specification Item">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" placeholder="e.g., Modular Switches"/>
+              <field name="sequence"/>
+            </group>
+            <group>
+              <field name="group_id" required="1"/>
+              <!-- group -> property is visible via group_id.property_id in the list if needed -->
+            </group>
+          </group>
+          <group string="Notes">
+            <field name="note" placeholder="Optional detailed specification or brand"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_estate_spec_item" model="ir.actions.act_window">
+    <field name="name">Specification Items</field>
+    <field name="res_model">estate.property.spec.item</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{}</field>
+    <field name="domain">[]</field>
+  </record>
+
+
+  <!-- ===================== MENUS ===================== -->
+  <!-- Assumes you already have: menu_realestate_root, menu_realestate_config -->
+
+  <menuitem id="menu_realestate_specs" name="Specifications"
+            parent="menu_realestate_config" sequence="40"/>
+
+  <menuitem id="menu_estate_spec_groups" name="Spec Groups"
+            parent="menu_realestate_specs" action="action_estate_spec_group"
+            sequence="10"/>
+
+  <menuitem id="menu_estate_spec_items" name="Spec Items"
+            parent="menu_realestate_specs" action="action_estate_spec_item"
+            sequence="20"/>
+
+</odoo>

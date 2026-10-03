@@ -1,0 +1,51 @@
+/* Property Card – realestate_website */
+
+.re-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+  will-change: transform;
+}
+.re-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1.25rem 2rem -0.75rem rgba(0,0,0,.15);
+}
+
+/* media */
+.re-card__media { aspect-ratio: 16 / 10; background: #f6f7f9; }
+.re-card__img {
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform .5s ease;
+}
+.re-card:hover .re-card__img { transform: scale(1.05); }
+
+/* tenure badge */
+.re-card__badge {
+  position: absolute;
+  left: .75rem;
+  top: .75rem;
+  padding: .4rem .6rem;
+  font-weight: 600;
+  background: rgba(255,255,255,.9);
+  color: #0d6efd;
+  border: 1px solid rgba(13,110,253,.25);
+  backdrop-filter: saturate(150%) blur(6px);
+  transition: transform .25s ease, opacity .25s ease;
+}
+.re-card:hover .re-card__badge { transform: translateY(-2px); }
+
+/* title/excerpt */
+.re-card .card-title { line-height: 1.25; padding: 0px; }
+.re-card__excerpt { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* price & CTA */
+.re-card__price { font-size: 1.05rem; }
+.re-card__cta {
+  color: #0d6efd;
+  opacity: .8;
+  transform: translateX(0);
+  transition: transform .25s ease, opacity .25s ease;
+}
+.re-card:hover .re-card__cta { opacity: 1; transform: translateX(3px); }

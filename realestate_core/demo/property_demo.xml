@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo Properties -->
+
+    <record id="property_demo_apartment_1" model="estate.property">
+        <field name="name">2 BHK Apartment in Whitefield</field>
+        <field name="type_id" ref="property_type_apartment"/>
+        <field name="price">6500000</field>
+        <field name="city">Bengaluru</field>
+        <field name="state">published</field>
+        <field name="description">Spacious 2 BHK apartment located in the heart of Whitefield with modern amenities and close proximity to IT hubs.</field>
+        <field name="bedrooms">2</field>
+        <field name="bathrooms">2</field>
+        <field name="furnishing">semi_furnished</field>
+    </record>
+
+    <record id="property_demo_villa_1" model="estate.property">
+        <field name="name">Luxury Villa in ECR Chennai</field>
+        <field name="type_id" ref="property_type_villa"/>
+        <field name="price">25000000</field>
+        <field name="city">Chennai</field>
+        <field name="state">published</field>
+        <field name="description">Beach-facing luxury villa with swimming pool, landscaped garden, and private parking.</field>
+        <field name="bedrooms">4</field>
+        <field name="bathrooms">5</field>
+        <field name="furnishing">furnished</field>
+    </record>
+
+    <record id="property_demo_commercial_1" model="estate.property">
+        <field name="name">Office Space in Bandra</field>
+        <field name="type_id" ref="property_type_office_space"/>
+        <field name="price">12000000</field>
+        <field name="city">Mumbai</field>
+        <field name="state">published</field>
+        <field name="description">Fully equipped office space suitable for startups and corporates, located in Bandra West.</field>
+        <field name="furnishing">furnished</field>
+    </record>
+
+    <record id="property_demo_land_1" model="estate.property">
+        <field name="name">Residential Plot in Gachibowli</field>
+        <field name="type_id" ref="property_type_land"/>
+        <field name="price">9500000</field>
+        <field name="city">Hyderabad</field>
+        <field name="state">published</field>
+        <field name="description">East-facing residential plot with clear title and easy access to main roads.</field>
+    </record>
+
+    <!-- Property Attribute Lines for Demo -->
+    <record id="property_demo_apartment_1_attr1" model="estate.property.attribute.line">
+        <field name="property_id" ref="property_demo_apartment_1"/>
+        <field name="attribute_id" ref="attr_bedrooms"/>
+        <field name="value_id" ref="attr_bedrooms_2"/>
+    </record>
+
+    <record id="property_demo_apartment_1_attr2" model="estate.property.attribute.line">
+        <field name="property_id" ref="property_demo_apartment_1"/>
+        <field name="attribute_id" ref="attr_bathrooms"/>
+        <field name="value_id" ref="attr_bathrooms_2"/>
+    </record>
+
+    <record id="property_demo_apartment_1_attr3" model="estate.property.attribute.line">
+        <field name="property_id" ref="property_demo_apartment_1"/>
+        <field name="attribute_id" ref="attr_amenities"/>
+        <field name="value_ids" eval="[(6, 0, [ref('attr_amenities_pool'), ref('attr_amenities_gym'), ref('attr_amenities_parking')])]"/>
+    </record>
+
+    <record id="property_demo_villa_1_attr1" model="estate.property.attribute.line">
+        <field name="property_id" ref="property_demo_villa_1"/>
+        <field name="attribute_id" ref="attr_amenities"/>
+        <field name="value_ids" eval="[(6, 0, [ref('attr_amenities_pool'), ref('attr_amenities_gym'), ref('attr_amenities_garden')])]"/>
+    </record>
+
+</odoo>

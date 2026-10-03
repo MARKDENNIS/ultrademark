@@ -1,0 +1,71 @@
+/* card hover polish */
+.o-re-card {
+  transition: transform .2s ease, box-shadow .2s ease;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+.o-re-card--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0,0,0,.08);
+}
+
+.o-re-card__imgwrap {
+  position: relative;
+}
+
+/* Ribbons container */
+.o-re-ribbons {
+  position: absolute;
+  top: .5rem;
+  left: .5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+/* Ribbon look (angled tag like Odoo products) */
+.o-re-ribbon {
+  position: relative;
+  display: inline-block;
+  padding: .25rem .5rem;
+  font-size: .75rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: .25rem;
+  line-height: 1;
+}
+.o-re-ribbon::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  bottom: -6px;
+  border-width: 6px 6px 0 0;
+  border-style: solid;
+  opacity: .3;
+}
+
+/* Color variants (map to Bootstrap palette) */
+.o-re-ribbon--primary { background:#0d6efd; }
+.o-re-ribbon--primary::after { border-color: rgba(0,0,0,.2) transparent transparent transparent; }
+
+.o-re-ribbon--secondary { background:#6c757d; }
+.o-re-ribbon--secondary::after { border-color: rgba(0,0,0,.25) transparent transparent transparent; }
+
+.o-re-ribbon--success { background:#198754; }
+.o-re-ribbon--success::after { border-color: rgba(0,0,0,.18) transparent transparent transparent; }
+
+.o-re-ribbon--danger { background:#dc3545; }
+.o-re-ribbon--danger::after { border-color: rgba(0,0,0,.18) transparent transparent transparent; }
+
+.o-re-ribbon--warning { background:#ffc107; color:#222; }
+.o-re-ribbon--warning::after { border-color: rgba(0,0,0,.15) transparent transparent transparent; }
+
+.o-re-ribbon--info { background:#0dcaf0; color:#072; }
+.o-re-ribbon--info::after { border-color: rgba(0,0,0,.15) transparent transparent transparent; }
+
+.o-re-ribbon--dark { background:#212529; }
+.o-re-ribbon--dark::after { border-color: rgba(255,255,255,.15) transparent transparent transparent; }
+
+.o-re-ribbon--light { background:#f8f9fa; color:#111; }
+.o-re-ribbon--light::after { border-color: rgba(0,0,0,.1) transparent transparent transparent; }

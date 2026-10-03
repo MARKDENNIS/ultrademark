@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <!-- =========================
+       PLAN CATEGORIES
+       ========================= -->
+
+  <!-- List -->
+  <record id="view_estate_plan_category_list" model="ir.ui.view">
+    <field name="name">estate.property.plan.category.list</field>
+    <field name="model">estate.property.plan.category</field>
+    <field name="arch" type="xml">
+      <list string="Plan Categories" create="true" edit="true">
+        <field name="sequence"/>
+        <field name="name"/>
+        <field name="code"/>
+        <field name="show_on_website"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form -->
+  <record id="view_estate_plan_category_form" model="ir.ui.view">
+    <field name="name">estate.property.plan.category.form</field>
+    <field name="model">estate.property.plan.category</field>
+    <field name="arch" type="xml">
+      <form string="Plan Category">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" placeholder="e.g., Master Plan"/>
+              <field name="code" placeholder="masterplan" help="Short code like: location_map, masterplan, floor_2bhk"/>
+            </group>
+            <group>
+              <field name="sequence"/>
+              <field name="show_on_website"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_estate_plan_category" model="ir.actions.act_window">
+    <field name="name">Plan Categories</field>
+    <field name="res_model">estate.property.plan.category</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{}</field>
+  </record>
+
+  <!-- Menu under Configuration -->
+  <menuitem id="menu_estate_plan_category"
+            name="Plan Categories"
+            parent="menu_realestate_config"
+            action="action_estate_plan_category"
+            sequence="20"/>
+
+  <!-- =========================
+       PLANS
+       ========================= -->
+
+  <!-- List -->
+  <record id="view_estate_plan_list" model="ir.ui.view">
+    <field name="name">estate.property.plan.list</field>
+    <field name="model">estate.property.plan</field>
+    <field name="arch" type="xml">
+      <list string="Plans" create="true" edit="true">
+        <field name="sequence"/>
+        <field name="name"/>
+        <field name="property_id"/>
+        <field name="category_id"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form -->
+  <record id="view_estate_plan_form" model="ir.ui.view">
+    <field name="name">estate.property.plan.form</field>
+    <field name="model">estate.property.plan</field>
+    <field name="arch" type="xml">
+      <form string="Property Plan">
+        <sheet>
+          <group>
+            <group>
+              <field name="name" placeholder="e.g., 2 BHK – Type A"/>
+              <field name="sequence"/>
+            </group>
+            <group>
+              <field name="property_id" required="1"/>
+              <field name="category_id" required="1"/>
+            </group>
+          </group>
+
+          <group string="Cover">
+            <field name="cover_image_1920" widget="image"/>
+          </group>
+
+          <notebook>
+            <page string="Images">
+              <field name="image_ids">
+                <list>
+                  <field name="sequence"/>
+                  <field name="image_1920" widget="image"/>
+                  <field name="caption"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="action_estate_plan" model="ir.actions.act_window">
+    <field name="name">Plans</field>
+    <field name="res_model">estate.property.plan</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{}</field>
+  </record>
+
+  <!-- Menu under Configuration -->
+  <menuitem id="menu_estate_plan"
+            name="Plans"
+            parent="menu_realestate_config"
+            action="action_estate_plan"
+            sequence="21"/>
+
+</odoo>

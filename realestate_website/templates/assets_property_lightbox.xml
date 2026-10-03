@@ -1,0 +1,8 @@
+<odoo>
+  <!--<template id="assets_property_lightbox" inherit_id="web.assets_frontend" name="Property Lightbox Assets">
+    <xpath expr="." position="inside">
+      <script type="text/javascript" src="/realestate_website/static/src/js/property_lightbox.js"/>
+      <link rel="stylesheet" href="/realestate_website/static/src/css/property_lightbox.scss"/>
+    </xpath>
+  </template>-->
+</odoo>

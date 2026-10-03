@@ -1,0 +1,4 @@
+# Release archives (kept locally for reference, not tracked in git)
+*.zip
+__pycache__/
+*.py[cod]

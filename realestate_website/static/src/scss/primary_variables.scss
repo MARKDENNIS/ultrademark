@@ -1,0 +1,37 @@
+/* --- Filter Bar Enhancements --- */
+@media (min-width: 992px) {
+    .border-start-lg {
+        border-left: 1px solid #e9ecef !important;
+    }
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* --- Property Card Animations & Layout --- */
+.re-card {
+    border-radius: 16px !important;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
+
+.re-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+
+/* Enforce Aspect Ratio (4:3) so cards never break grid height */
+.re-card__imgwrap {
+    aspect-ratio: 4 / 3;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    background-color: #f8f9fa;
+}
+
+/* Smooth zoom on the image when hovering the card */
+.re-card__imgwrap img.transition-transform {
+    transition: transform 0.6s ease;
+}
+
+.re-card:hover .re-card__imgwrap img.transition-transform {
+    transform: scale(1.08);
+}

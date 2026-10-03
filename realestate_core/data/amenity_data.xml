@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Amenity Categories -->
+  <data noupdate="1">
+    <record id="amenity_cat_security" model="estate.property.amenity.category">
+      <field name="name">Security and Safety</field>
+      <field name="sequence">10</field>
+      <field name="icon">fa fa-shield</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_interior" model="estate.property.amenity.category">
+      <field name="name">Interior</field>
+      <field name="sequence">20</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_exterior" model="estate.property.amenity.category">
+      <field name="name">Exterior</field>
+      <field name="sequence">30</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_recreation" model="estate.property.amenity.category">
+      <field name="name">Recreation and Lifestyle</field>
+      <field name="sequence">40</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_utilities" model="estate.property.amenity.category">
+      <field name="name">Utilities and Services</field>
+      <field name="sequence">50</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_community" model="estate.property.amenity.category">
+      <field name="name">Community</field>
+      <field name="sequence">60</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_accessibility" model="estate.property.amenity.category">
+      <field name="name">Accessibility</field>
+      <field name="sequence">70</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_cat_green" model="estate.property.amenity.category">
+      <field name="name">Green and Sustainability</field>
+      <field name="sequence">80</field>
+      <field name="active">1</field>
+    </record>
+
+    <!-- Security & Safety -->
+    <record id="amenity_cctv" model="estate.property.amenity">
+      <field name="name">CCTV Surveillance</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_guard_24x7" model="estate.property.amenity">
+      <field name="name">24x7 Security</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+      <field name="active">1</field>
+    </record>
+    <record id="amenity_intercom" model="estate.property.amenity">
+      <field name="name">Intercom</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_fire_sprinklers" model="estate.property.amenity">
+      <field name="name">Fire Sprinklers</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_fire_extinguishers" model="estate.property.amenity">
+      <field name="name">Fire Extinguishers</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">50</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_video_door_phone" model="estate.property.amenity">
+      <field name="name">Video Door Phone</field>
+      <field name="category_id" ref="amenity_cat_security"/>
+      <field name="sequence">60</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Interior -->
+    <record id="amenity_modular_kitchen" model="estate.property.amenity">
+      <field name="name">Modular Kitchen</field>
+      <field name="category_id" ref="amenity_cat_interior"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_wardrobes" model="estate.property.amenity">
+      <field name="name">Wardrobes</field>
+      <field name="category_id" ref="amenity_cat_interior"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_ac" model="estate.property.amenity">
+      <field name="name">Air Conditioning</field>
+      <field name="category_id" ref="amenity_cat_interior"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_heating" model="estate.property.amenity">
+      <field name="name">Heating</field>
+      <field name="category_id" ref="amenity_cat_interior"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_false_ceiling" model="estate.property.amenity">
+      <field name="name">False Ceiling</field>
+      <field name="category_id" ref="amenity_cat_interior"/>
+      <field name="sequence">50</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Exterior -->
+    <record id="amenity_balcony" model="estate.property.amenity">
+      <field name="name">Balcony</field>
+      <field name="category_id" ref="amenity_cat_exterior"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_terrace" model="estate.property.amenity">
+      <field name="name">Terrace</field>
+      <field name="category_id" ref="amenity_cat_exterior"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_private_garden" model="estate.property.amenity">
+      <field name="name">Private Garden</field>
+      <field name="category_id" ref="amenity_cat_exterior"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_covered_parking" model="estate.property.amenity">
+      <field name="name">Covered Parking</field>
+      <field name="category_id" ref="amenity_cat_exterior"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_open_parking" model="estate.property.amenity">
+      <field name="name">Open Parking</field>
+      <field name="category_id" ref="amenity_cat_exterior"/>
+      <field name="sequence">50</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Recreation & Lifestyle -->
+    <record id="amenity_swimming_pool" model="estate.property.amenity">
+      <field name="name">Swimming Pool</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_gym" model="estate.property.amenity">
+      <field name="name">Gym</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_clubhouse" model="estate.property.amenity">
+      <field name="name">Clubhouse</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_play_area" model="estate.property.amenity">
+      <field name="name">Children's Play Area</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_jogging_track" model="estate.property.amenity">
+      <field name="name">Jogging Track</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">50</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_sports_courts" model="estate.property.amenity">
+      <field name="name">Sports Courts</field>
+      <field name="category_id" ref="amenity_cat_recreation"/>
+      <field name="sequence">60</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Utilities & Services -->
+    <record id="amenity_power_backup" model="estate.property.amenity">
+      <field name="name">Power Backup</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_water_supply" model="estate.property.amenity">
+      <field name="name">24/7 Water Supply</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_elevators" model="estate.property.amenity">
+      <field name="name">Elevators</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_wifi" model="estate.property.amenity">
+      <field name="name">Wi-Fi / Internet</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_gas_pipeline" model="estate.property.amenity">
+      <field name="name">Piped Gas</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">50</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_stp" model="estate.property.amenity">
+      <field name="name">Sewage Treatment Plant</field>
+      <field name="category_id" ref="amenity_cat_utilities"/>
+      <field name="sequence">60</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Community -->
+    <record id="amenity_pet_friendly" model="estate.property.amenity">
+      <field name="name">Pet Friendly</field>
+      <field name="category_id" ref="amenity_cat_community"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_visitor_parking" model="estate.property.amenity">
+      <field name="name">Visitor Parking</field>
+      <field name="category_id" ref="amenity_cat_community"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_concierge" model="estate.property.amenity">
+      <field name="name">Concierge / Reception</field>
+      <field name="category_id" ref="amenity_cat_community"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_business_center" model="estate.property.amenity">
+      <field name="name">Business Center / Co-working</field>
+      <field name="category_id" ref="amenity_cat_community"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Accessibility -->
+    <record id="amenity_wheelchair_access" model="estate.property.amenity">
+      <field name="name">Wheelchair Access</field>
+      <field name="category_id" ref="amenity_cat_accessibility"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_ramps" model="estate.property.amenity">
+      <field name="name">Ramps</field>
+      <field name="category_id" ref="amenity_cat_accessibility"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_braille_signage" model="estate.property.amenity">
+      <field name="name">Braille Signage</field>
+      <field name="category_id" ref="amenity_cat_accessibility"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+
+    <!-- Green & Sustainability -->
+    <record id="amenity_solar_panels" model="estate.property.amenity">
+      <field name="name">Solar Panels</field>
+      <field name="category_id" ref="amenity_cat_green"/>
+      <field name="sequence">10</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_rainwater" model="estate.property.amenity">
+      <field name="name">Rainwater Harvesting</field>
+      <field name="category_id" ref="amenity_cat_green"/>
+      <field name="sequence">20</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_energy_lights" model="estate.property.amenity">
+      <field name="name">Energy-efficient Lighting</field>
+      <field name="category_id" ref="amenity_cat_green"/>
+      <field name="sequence">30</field>
+      <field name="show_on_website">1</field>
+    </record>
+    <record id="amenity_recycling" model="estate.property.amenity">
+      <field name="name">Recycling Facilities</field>
+      <field name="category_id" ref="amenity_cat_green"/>
+      <field name="sequence">40</field>
+      <field name="show_on_website">1</field>
+    </record>
+  </data>
+</odoo>
